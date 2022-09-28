@@ -1,0 +1,77 @@
+TRACE.GetData LV4, LV5, LV6, LV7 
+if (LV4 != 3) Jump #end 
+LV1 = GetDali.3ESrc1[LV6] 
+LV2 = GetDali.3ESrc2[LV6] 
+LV3 = GetDali.3EValue[LV6] 
+
+if (LV1 != 7) Jump #end 
+if (LV2 == 0) Jump #push1 
+if (LV2 == 1) Jump #push2 
+#push1 
+if (LV3 == 2) Jump #ShortPress_1 
+if (LV3 == 9) Jump #LongPress_Start_1 
+if (LV3 == 11) Jump #LongPress_1 
+Jump #end 
+
+#ShortPress_1 
+GV16=GV18 
+
+Dali.arc    L[2],E[0],GV16 
+Dali.direct L[1],3,0x112100 
+Dali.direct L[2],3,0x112300 
+wait 100 
+Dali.direct L[2],3,0x102000 
+Dali.direct L[2],3,0x102200 
+Jump #end 
+
+#LongPress_Start_1 
+GV17=GV17^1 
+#LongPress_1                      ,
+GV18=GV18 + 10 
+if (GV18 <= 254) Jump #LongPress_UP_Okay_1 
+GV18=254 
+Jump #LongPress_UP_Okay_1
+ 
+#LongPress_UP_Okay_1 
+Dali.arc    L[1],E[10],GV18
+Dali.arc    L[2],E[0],GV18 
+Dali.direct L[2],3,0x112100 
+Dali.direct L[2],3,0x112300 
+wait 100 
+Dali.direct L[2],3,0x102000 
+Dali.direct L[2],3,0x102200 
+Jump #end 
+#push2 
+if (LV3 == 2) Jump #ShortPress_2 
+if (LV3 == 9) Jump #LongPress_Start_2 
+if (LV3 == 11) Jump #LongPress_2 
+Jump #end 
+
+#ShortPress_2 
+GV16=0 
+Dali.arc L[2],E[0],GV16 
+Dali.direct L[2],3,0x112000 
+Dali.direct L[2],3,0x112200 
+wait 100 
+Dali.direct L[2],3,0x102100 
+Dali.direct L[2],3,0x102300 
+Jump #end 
+
+#LongPress_Start_2 
+GV17=GV17^1 
+#LongPress_2 
+LV10=GV17&1 
+if (LV10==0) Jump #LongPress_DOWM_2 
+
+#LongPress_DOWM_2 
+if (GV18<=10) Jump #LongPress_DOWM_P2_2 
+GV18=GV18-10 
+Jump #LongPress_DOWM_Okay_2 
+
+#LongPress_DOWM_P2_2 
+GV18=1 
+
+#LongPress_DOWM_Okay_2 
+Dali.arc L[2],E[0],GV18 
+Jump #end 
+#end 

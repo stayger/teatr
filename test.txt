@@ -1,0 +1,9 @@
+Dali.arc L[1],E[7],254
+Dali.direct L[1],3,0x112107
+Dali.direct L[1],3,0x112307
+wait 100
+Dali.direct L[1],3,0x102107
+Dali.direct L[1],3,0x102207
+
+Jump #end 
+#end

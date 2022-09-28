@@ -1,0 +1,17 @@
+TRACE.GetData LV4, LV5, LV6, LV7 
+if (LV4 != 3) Jump #end 
+LV1 = GetDali.3ESrc1[LV6] 
+LV2 = GetDali.3ESrc2[LV6] 
+LV3 = GetDali.3EValue[LV6] 
+
+if (LV1!=7) Jump #end
+
+LV10 = 0x100000
+LV11 = LV2*2+1
+LV12=LV10+LV11*0x100+LV1
+
+
+Dali.direct L[1],3,LV12
+
+Jump #end 
+#end
